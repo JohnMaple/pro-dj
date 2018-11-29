@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+{#        普通地址渲染方式，维护性不好 #}
+{#        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>#}
+{# 可以使用标签代替上面的路径 {% url name var %} #}
+{#        <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>#}
+{#        使用命名空间，需要在应用的urls.py里面定义app_name='polls',这样就不会找错 #}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+</body>
+</html>
